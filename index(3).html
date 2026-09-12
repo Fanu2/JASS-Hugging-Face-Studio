@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JASS HUGGING FACE STUDIO — 100 Channels</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg:#0b1020;
+  --panel:#121a2b;
+  --panel-hover:#1b263d;
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --accent:#f97316;
+  --accent-soft:#fdba74;
+  --border:#29364f;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  min-height:100vh;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 85% 0%, #431407 0, transparent 34%),
+    radial-gradient(circle at 10% 15%, #172554 0, transparent 28%),
+    var(--bg);
+}
+.container { max-width:1250px; margin:auto; padding:42px 24px 60px; }
+header {
+  display:flex; justify-content:space-between; align-items:end;
+  gap:28px; margin-bottom:28px;
+}
+.eyebrow {
+  color:var(--accent-soft); text-transform:uppercase;
+  letter-spacing:.18em; font-size:12px; font-weight:700;
+}
+h1 { margin:8px 0 6px; font-size:40px; }
+.subtitle { margin:0; color:var(--muted); }
+.search {
+  width:350px; max-width:100%; padding:14px 16px;
+  background:var(--panel); color:var(--text);
+  border:1px solid var(--border); border-radius:10px;
+  outline:none; font-size:14px;
+}
+.search:focus { border-color:var(--accent); }
+.stats {
+  padding:17px 19px; margin-bottom:20px;
+  background:rgba(18,26,43,.92); border:1px solid var(--border);
+  border-radius:14px; color:var(--muted);
+}
+.stats strong { color:var(--text); }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:14px;
+}
+.card {
+  display:flex; gap:16px; align-items:center;
+  min-height:105px; padding:17px;
+  background:rgba(18,26,43,.94);
+  border:1px solid var(--border); border-radius:13px;
+  transition:transform .15s, background .15s, border-color .15s;
+}
+.card:hover {
+  background:var(--panel-hover);
+  border-color:#475569;
+  transform:translateY(-2px);
+}
+.number {
+  width:42px; height:42px; flex:none;
+  display:grid; place-items:center;
+  background:#1f2937; border-radius:10px;
+  color:var(--muted); font-size:12px; font-weight:700;
+}
+.category {
+  margin-bottom:5px; color:var(--accent-soft);
+  text-transform:uppercase; letter-spacing:.08em;
+  font-size:10px; font-weight:700;
+}
+h2 { margin:0 0 8px; font-size:16px; }
+a { color:var(--accent-soft); text-decoration:none; font-size:13px; }
+a:hover { text-decoration:underline; }
+.empty {
+  display:none; padding:35px; text-align:center;
+  color:var(--muted); border:1px dashed var(--border);
+  border-radius:13px;
+}
+footer { margin-top:35px; color:var(--muted); font-size:13px; }
+@media(max-width:750px) {
+  header { display:block; }
+  .search { width:100%; margin-top:20px; }
+  h1 { font-size:31px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div>
+      <div class="eyebrow">JASS HUGGING FACE STUDIO</div>
+      <h1>AI Hub Directory</h1>
+      <p class="subtitle">100 curated Hugging Face creators and organizations.</p>
+    </div>
+    <input id="search" class="search" type="search"
+           placeholder="Search creators, categories, or links…"
+           aria-label="Search channels">
+  </header>
+
+  <div class="stats">
+    <strong>100 Hugging Face channels</strong>
+    &nbsp;·&nbsp; Click any entry to open its Hub page.
+    <span id="count"></span>
+  </div>
+
+  <main id="grid" class="grid">
+    
+    <article class="card" data-search="hugging face ai platform https://huggingface.co/huggingface">
+      <div class="number">01</div>
+      <div class="content">
+        <div class="category">AI Platform</div>
+        <h2>Hugging Face</h2>
+        <a href="https://huggingface.co/huggingface" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="openai community ai models https://huggingface.co/openai-community">
+      <div class="number">02</div>
+      <div class="content">
+        <div class="category">AI Models</div>
+        <h2>OpenAI Community</h2>
+        <a href="https://huggingface.co/openai-community" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="google ai models https://huggingface.co/google">
+      <div class="number">03</div>
+      <div class="content">
+        <div class="category">AI Models</div>
+        <h2>Google</h2>
+        <a href="https://huggingface.co/google" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="meta llama llms https://huggingface.co/meta-llama">
+      <div class="number">04</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>Meta Llama</h2>
+        <a href="https://huggingface.co/meta-llama" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="microsoft ai models https://huggingface.co/microsoft">
+      <div class="number">05</div>
+      <div class="content">
+        <div class="category">AI Models</div>
+        <h2>Microsoft</h2>
+        <a href="https://huggingface.co/microsoft" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="qwen llms https://huggingface.co/qwen">
+      <div class="number">06</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>Qwen</h2>
+        <a href="https://huggingface.co/Qwen" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="mistral ai llms https://huggingface.co/mistralai">
+      <div class="number">07</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>Mistral AI</h2>
+        <a href="https://huggingface.co/mistralai" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="deepseek ai llms https://huggingface.co/deepseek-ai">
+      <div class="number">08</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>DeepSeek AI</h2>
+        <a href="https://huggingface.co/deepseek-ai" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="nvidia ai hardware https://huggingface.co/nvidia">
+      <div class="number">09</div>
+      <div class="content">
+        <div class="category">AI Hardware</div>
+        <h2>NVIDIA</h2>
+        <a href="https://huggingface.co/nvidia" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="ibm granite llms https://huggingface.co/ibm-granite">
+      <div class="number">10</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>IBM Granite</h2>
+        <a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="intel ai hardware https://huggingface.co/intel">
+      <div class="number">11</div>
+      <div class="content">
+        <div class="category">AI Hardware</div>
+        <h2>Intel</h2>
+        <a href="https://huggingface.co/Intel" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="amd ai hardware https://huggingface.co/amd">
+      <div class="number">12</div>
+      <div class="content">
+        <div class="category">AI Hardware</div>
+        <h2>AMD</h2>
+        <a href="https://huggingface.co/amd" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="apple ai research https://huggingface.co/apple">
+      <div class="number">13</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Apple</h2>
+        <a href="https://huggingface.co/apple" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="facebook ai ai research https://huggingface.co/facebook">
+      <div class="number">14</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Facebook AI</h2>
+        <a href="https://huggingface.co/facebook" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="stability ai generative ai https://huggingface.co/stabilityai">
+      <div class="number">15</div>
+      <div class="content">
+        <div class="category">Generative AI</div>
+        <h2>Stability AI</h2>
+        <a href="https://huggingface.co/stabilityai" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="black forest labs image generation https://huggingface.co/black-forest-labs">
+      <div class="number">16</div>
+      <div class="content">
+        <div class="category">Image Generation</div>
+        <h2>Black Forest Labs</h2>
+        <a href="https://huggingface.co/black-forest-labs" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="cohere llms https://huggingface.co/cohereforai">
+      <div class="number">17</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>Cohere</h2>
+        <a href="https://huggingface.co/CohereForAI" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="allen ai ai research https://huggingface.co/allenai">
+      <div class="number">18</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Allen AI</h2>
+        <a href="https://huggingface.co/allenai" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="baai ai research https://huggingface.co/baai">
+      <div class="number">19</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>BAAI</h2>
+        <a href="https://huggingface.co/BAAI" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="01 ai llms https://huggingface.co/01-ai">
+      <div class="number">20</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>01 AI</h2>
+        <a href="https://huggingface.co/01-ai" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="thudm llms https://huggingface.co/thudm">
+      <div class="number">21</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>THUDM</h2>
+        <a href="https://huggingface.co/THUDM" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="internlm llms https://huggingface.co/internlm">
+      <div class="number">22</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>InternLM</h2>
+        <a href="https://huggingface.co/internlm" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="openbmb llms https://huggingface.co/openbmb">
+      <div class="number">23</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>OpenBMB</h2>
+        <a href="https://huggingface.co/openbmb" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="minimax llms https://huggingface.co/minimaxai">
+      <div class="number">24</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>MiniMax</h2>
+        <a href="https://huggingface.co/MiniMaxAI" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="zhipu ai llms https://huggingface.co/zai-org">
+      <div class="number">25</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>Zhipu AI</h2>
+        <a href="https://huggingface.co/zai-org" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="moonshot ai llms https://huggingface.co/moonshotai">
+      <div class="number">26</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>Moonshot AI</h2>
+        <a href="https://huggingface.co/moonshotai" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="bytedance ai research https://huggingface.co/bytedance">
+      <div class="number">27</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>ByteDance</h2>
+        <a href="https://huggingface.co/ByteDance" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="tencent ai research https://huggingface.co/tencent">
+      <div class="number">28</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Tencent</h2>
+        <a href="https://huggingface.co/tencent" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="alibaba damo ai research https://huggingface.co/damo">
+      <div class="number">29</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Alibaba DAMO</h2>
+        <a href="https://huggingface.co/damo" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="baidu ai research https://huggingface.co/baidu">
+      <div class="number">30</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Baidu</h2>
+        <a href="https://huggingface.co/baidu" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="sensetime computer vision https://huggingface.co/sensetime">
+      <div class="number">31</div>
+      <div class="content">
+        <div class="category">Computer Vision</div>
+        <h2>SenseTime</h2>
+        <a href="https://huggingface.co/SenseTime" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="salesforce ai ai research https://huggingface.co/salesforce">
+      <div class="number">32</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Salesforce AI</h2>
+        <a href="https://huggingface.co/Salesforce" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="adobe ai research https://huggingface.co/adobe">
+      <div class="number">33</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Adobe</h2>
+        <a href="https://huggingface.co/adobe" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="nokia ai research https://huggingface.co/nokia">
+      <div class="number">34</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Nokia</h2>
+        <a href="https://huggingface.co/Nokia" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="servicenow ai enterprise ai https://huggingface.co/servicenow-ai">
+      <div class="number">35</div>
+      <div class="content">
+        <div class="category">Enterprise AI</div>
+        <h2>ServiceNow AI</h2>
+        <a href="https://huggingface.co/ServiceNow-AI" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="databricks ai data https://huggingface.co/databricks">
+      <div class="number">36</div>
+      <div class="content">
+        <div class="category">AI Data</div>
+        <h2>Databricks</h2>
+        <a href="https://huggingface.co/databricks" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="snowflake ai data https://huggingface.co/snowflake">
+      <div class="number">37</div>
+      <div class="content">
+        <div class="category">AI Data</div>
+        <h2>Snowflake</h2>
+        <a href="https://huggingface.co/snowflake" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="mongodb ai data https://huggingface.co/mongodb">
+      <div class="number">38</div>
+      <div class="content">
+        <div class="category">AI Data</div>
+        <h2>MongoDB</h2>
+        <a href="https://huggingface.co/mongodb" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="nomic ai embeddings https://huggingface.co/nomic-ai">
+      <div class="number">39</div>
+      <div class="content">
+        <div class="category">Embeddings</div>
+        <h2>Nomic AI</h2>
+        <a href="https://huggingface.co/nomic-ai" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="unsloth llm tools https://huggingface.co/unsloth">
+      <div class="number">40</div>
+      <div class="content">
+        <div class="category">LLM Tools</div>
+        <h2>Unsloth</h2>
+        <a href="https://huggingface.co/unsloth" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="lightricks generative ai https://huggingface.co/lightricks">
+      <div class="number">41</div>
+      <div class="content">
+        <div class="category">Generative AI</div>
+        <h2>Lightricks</h2>
+        <a href="https://huggingface.co/Lightricks" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="runway video ai https://huggingface.co/runwayml">
+      <div class="number">42</div>
+      <div class="content">
+        <div class="category">Video AI</div>
+        <h2>Runway</h2>
+        <a href="https://huggingface.co/runwayml" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="elevenlabs speech ai https://huggingface.co/elevenlabs">
+      <div class="number">43</div>
+      <div class="content">
+        <div class="category">Speech AI</div>
+        <h2>ElevenLabs</h2>
+        <a href="https://huggingface.co/elevenlabs" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="kyutai speech ai https://huggingface.co/kyutai">
+      <div class="number">44</div>
+      <div class="content">
+        <div class="category">Speech AI</div>
+        <h2>Kyutai</h2>
+        <a href="https://huggingface.co/kyutai" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="hume ai speech ai https://huggingface.co/humeai">
+      <div class="number">45</div>
+      <div class="content">
+        <div class="category">Speech AI</div>
+        <h2>Hume AI</h2>
+        <a href="https://huggingface.co/humeai" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="nvidia nemo ai models https://huggingface.co/nvidia">
+      <div class="number">46</div>
+      <div class="content">
+        <div class="category">AI Models</div>
+        <h2>NVIDIA NeMo</h2>
+        <a href="https://huggingface.co/nvidia" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="black forest labs image generation https://huggingface.co/black-forest-labs">
+      <div class="number">47</div>
+      <div class="content">
+        <div class="category">Image Generation</div>
+        <h2>Black Forest Labs</h2>
+        <a href="https://huggingface.co/black-forest-labs" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="krea ai image generation https://huggingface.co/krea">
+      <div class="number">48</div>
+      <div class="content">
+        <div class="category">Image Generation</div>
+        <h2>Krea AI</h2>
+        <a href="https://huggingface.co/krea" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="ideogram image generation https://huggingface.co/ideogram">
+      <div class="number">49</div>
+      <div class="content">
+        <div class="category">Image Generation</div>
+        <h2>Ideogram</h2>
+        <a href="https://huggingface.co/ideogram" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="laion datasets https://huggingface.co/laion">
+      <div class="number">50</div>
+      <div class="content">
+        <div class="category">Datasets</div>
+        <h2>LAION</h2>
+        <a href="https://huggingface.co/laion" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="eleutherai ai research https://huggingface.co/eleutherai">
+      <div class="number">51</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>EleutherAI</h2>
+        <a href="https://huggingface.co/EleutherAI" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="together ai ai infrastructure https://huggingface.co/togethercomputer">
+      <div class="number">52</div>
+      <div class="content">
+        <div class="category">AI Infrastructure</div>
+        <h2>Together AI</h2>
+        <a href="https://huggingface.co/togethercomputer" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="nous research llms https://huggingface.co/nousresearch">
+      <div class="number">53</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>Nous Research</h2>
+        <a href="https://huggingface.co/NousResearch" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="teknium llms https://huggingface.co/teknium">
+      <div class="number">54</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>Teknium</h2>
+        <a href="https://huggingface.co/teknium" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="thebloke gguf https://huggingface.co/thebloke">
+      <div class="number">55</div>
+      <div class="content">
+        <div class="category">GGUF</div>
+        <h2>TheBloke</h2>
+        <a href="https://huggingface.co/TheBloke" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="bartowski gguf https://huggingface.co/bartowski">
+      <div class="number">56</div>
+      <div class="content">
+        <div class="category">GGUF</div>
+        <h2>bartowski</h2>
+        <a href="https://huggingface.co/bartowski" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="lmstudio-community local ai https://huggingface.co/lmstudio-community">
+      <div class="number">57</div>
+      <div class="content">
+        <div class="category">Local AI</div>
+        <h2>lmstudio-community</h2>
+        <a href="https://huggingface.co/lmstudio-community" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="thebloke archive local ai https://huggingface.co/thebloke">
+      <div class="number">58</div>
+      <div class="content">
+        <div class="category">Local AI</div>
+        <h2>TheBloke Archive</h2>
+        <a href="https://huggingface.co/TheBloke" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="maziyarpanahi llms https://huggingface.co/maziyarpanahi">
+      <div class="number">59</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>MaziyarPanahi</h2>
+        <a href="https://huggingface.co/MaziyarPanahi" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="bartowski archive local ai https://huggingface.co/bartowski">
+      <div class="number">60</div>
+      <div class="content">
+        <div class="category">Local AI</div>
+        <h2>bartowski Archive</h2>
+        <a href="https://huggingface.co/bartowski" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="quantfactory quantization https://huggingface.co/quantfactory">
+      <div class="number">61</div>
+      <div class="content">
+        <div class="category">Quantization</div>
+        <h2>QuantFactory</h2>
+        <a href="https://huggingface.co/QuantFactory" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="ggml-org local ai https://huggingface.co/ggml-org">
+      <div class="number">62</div>
+      <div class="content">
+        <div class="category">Local AI</div>
+        <h2>ggml-org</h2>
+        <a href="https://huggingface.co/ggml-org" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="mozilla ai research https://huggingface.co/mozilla">
+      <div class="number">63</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Mozilla</h2>
+        <a href="https://huggingface.co/mozilla" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="mozilla ai ai research https://huggingface.co/mozilla">
+      <div class="number">64</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Mozilla AI</h2>
+        <a href="https://huggingface.co/Mozilla" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="nvidia ai ai models https://huggingface.co/nvidia">
+      <div class="number">65</div>
+      <div class="content">
+        <div class="category">AI Models</div>
+        <h2>NVIDIA AI</h2>
+        <a href="https://huggingface.co/nvidia" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="h2o ai llms https://huggingface.co/h2oai">
+      <div class="number">66</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>H2O AI</h2>
+        <a href="https://huggingface.co/h2oai" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="together computer llms https://huggingface.co/togethercomputer">
+      <div class="number">67</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>Together Computer</h2>
+        <a href="https://huggingface.co/togethercomputer" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="upstage llms https://huggingface.co/upstage">
+      <div class="number">68</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>Upstage</h2>
+        <a href="https://huggingface.co/upstage" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="cerebras ai hardware https://huggingface.co/cerebras">
+      <div class="number">69</div>
+      <div class="content">
+        <div class="category">AI Hardware</div>
+        <h2>Cerebras</h2>
+        <a href="https://huggingface.co/cerebras" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="groq ai hardware https://huggingface.co/groq">
+      <div class="number">70</div>
+      <div class="content">
+        <div class="category">AI Hardware</div>
+        <h2>Groq</h2>
+        <a href="https://huggingface.co/Groq" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="sakana ai ai research https://huggingface.co/sakanaai">
+      <div class="number">71</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Sakana AI</h2>
+        <a href="https://huggingface.co/SakanaAI" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="arcee ai llms https://huggingface.co/arcee-ai">
+      <div class="number">72</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>Arcee AI</h2>
+        <a href="https://huggingface.co/arcee-ai" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="ai2 ai research https://huggingface.co/allenai">
+      <div class="number">73</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>AI2</h2>
+        <a href="https://huggingface.co/allenai" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="nousresearch llms https://huggingface.co/nousresearch">
+      <div class="number">74</div>
+      <div class="content">
+        <div class="category">LLMs</div>
+        <h2>NousResearch</h2>
+        <a href="https://huggingface.co/NousResearch" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="opengvlab computer vision https://huggingface.co/opengvlab">
+      <div class="number">75</div>
+      <div class="content">
+        <div class="category">Computer Vision</div>
+        <h2>OpenGVLab</h2>
+        <a href="https://huggingface.co/OpenGVLab" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="idea-research computer vision https://huggingface.co/idea-research">
+      <div class="number">76</div>
+      <div class="content">
+        <div class="category">Computer Vision</div>
+        <h2>IDEA-Research</h2>
+        <a href="https://huggingface.co/IDEA-Research" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="bytedance research ai research https://huggingface.co/bytedance">
+      <div class="number">77</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>ByteDance Research</h2>
+        <a href="https://huggingface.co/ByteDance" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="hugging face h4 ai research https://huggingface.co/h4">
+      <div class="number">78</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Hugging Face H4</h2>
+        <a href="https://huggingface.co/h4" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="hugging face smollab small models https://huggingface.co/huggingfacetb">
+      <div class="number">79</div>
+      <div class="content">
+        <div class="category">Small Models</div>
+        <h2>Hugging Face SmolLab</h2>
+        <a href="https://huggingface.co/HuggingFaceTB" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="hugging face tb small models https://huggingface.co/huggingfacetb">
+      <div class="number">80</div>
+      <div class="content">
+        <div class="category">Small Models</div>
+        <h2>Hugging Face TB</h2>
+        <a href="https://huggingface.co/HuggingFaceTB" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="hugging face sentence transformers embeddings https://huggingface.co/sentence-transformers">
+      <div class="number">81</div>
+      <div class="content">
+        <div class="category">Embeddings</div>
+        <h2>Hugging Face Sentence Transformers</h2>
+        <a href="https://huggingface.co/sentence-transformers" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="sentence transformers embeddings https://huggingface.co/sentence-transformers">
+      <div class="number">82</div>
+      <div class="content">
+        <div class="category">Embeddings</div>
+        <h2>Sentence Transformers</h2>
+        <a href="https://huggingface.co/sentence-transformers" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="microsoft research ai research https://huggingface.co/microsoft">
+      <div class="number">83</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Microsoft Research</h2>
+        <a href="https://huggingface.co/microsoft" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="google research ai research https://huggingface.co/google">
+      <div class="number">84</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Google Research</h2>
+        <a href="https://huggingface.co/google" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="meta ai ai research https://huggingface.co/facebook">
+      <div class="number">85</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Meta AI</h2>
+        <a href="https://huggingface.co/facebook" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="mistral research ai research https://huggingface.co/mistralai">
+      <div class="number">86</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Mistral Research</h2>
+        <a href="https://huggingface.co/mistralai" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="qwen research ai research https://huggingface.co/qwen">
+      <div class="number">87</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Qwen Research</h2>
+        <a href="https://huggingface.co/Qwen" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="deepseek research ai research https://huggingface.co/deepseek-ai">
+      <div class="number">88</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>DeepSeek Research</h2>
+        <a href="https://huggingface.co/deepseek-ai" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="ibm research ai research https://huggingface.co/ibm-granite">
+      <div class="number">89</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>IBM Research</h2>
+        <a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="stanford nlp nlp https://huggingface.co/stanfordnlp">
+      <div class="number">90</div>
+      <div class="content">
+        <div class="category">NLP</div>
+        <h2>Stanford NLP</h2>
+        <a href="https://huggingface.co/stanfordnlp" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="berkeley ai research ai research https://huggingface.co/berkeley-nest">
+      <div class="number">91</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Berkeley AI Research</h2>
+        <a href="https://huggingface.co/berkeley-nest" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="cornell ai ai research https://huggingface.co/cornellius-gat">
+      <div class="number">92</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Cornell AI</h2>
+        <a href="https://huggingface.co/cornellius-gat" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="salesforce ai research ai research https://huggingface.co/salesforce">
+      <div class="number">93</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Salesforce AI Research</h2>
+        <a href="https://huggingface.co/Salesforce" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="mila ai research https://huggingface.co/mila-iqia">
+      <div class="number">94</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Mila</h2>
+        <a href="https://huggingface.co/mila-iqia" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="nyu nlp https://huggingface.co/nyu-mll">
+      <div class="number">95</div>
+      <div class="content">
+        <div class="category">NLP</div>
+        <h2>NYU</h2>
+        <a href="https://huggingface.co/nyu-mll" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="bigscience ai research https://huggingface.co/bigscience">
+      <div class="number">96</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>BigScience</h2>
+        <a href="https://huggingface.co/bigscience" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="helsinki-nlp nlp https://huggingface.co/helsinki-nlp">
+      <div class="number">97</div>
+      <div class="content">
+        <div class="category">NLP</div>
+        <h2>Helsinki-NLP</h2>
+        <a href="https://huggingface.co/Helsinki-NLP" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="ukplab nlp https://huggingface.co/ukplab">
+      <div class="number">98</div>
+      <div class="content">
+        <div class="category">NLP</div>
+        <h2>UKPLab</h2>
+        <a href="https://huggingface.co/UKPLab" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="deepmind ai research https://huggingface.co/deepmind">
+      <div class="number">99</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>DeepMind</h2>
+        <a href="https://huggingface.co/deepmind" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+    <article class="card" data-search="anthropic research ai research https://huggingface.co/anthropic">
+      <div class="number">100</div>
+      <div class="content">
+        <div class="category">AI Research</div>
+        <h2>Anthropic Research</h2>
+        <a href="https://huggingface.co/Anthropic" target="_blank" rel="noopener noreferrer">
+          Open on Hugging Face ↗
+        </a>
+      </div>
+    </article>
+  </main>
+
+  <div id="empty" class="empty">No matching channels found.</div>
+
+  <footer>
+    Generated from the channel list built into JASS HUGGING FACE STUDIO.
+  </footer>
+</div>
+
+<script>
+const input = document.getElementById("search");
+const cards = [...document.querySelectorAll(".card")];
+const count = document.getElementById("count");
+const empty = document.getElementById("empty");
+
+function filter() {
+  const q = input.value.trim().toLowerCase();
+  let visible = 0;
+
+  cards.forEach(card => {
+    const match = card.dataset.search.includes(q);
+    card.style.display = match ? "" : "flex";
+    if (match) visible++;
+  });
+
+  count.textContent = q ? ` · ${visible} result${visible === 1 ? "" : "s"}` : "";
+  empty.style.display = visible ? "none" : "block";
+}
+
+input.addEventListener("input", filter);
+</script>
+</body>
+</html>
